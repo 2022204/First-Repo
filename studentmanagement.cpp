@@ -3,10 +3,10 @@
 using namespace std;
 class student
 {
-int marks;
 string name;
 string regno;
 public :
+int marks;
 student()
 {
     marks=0;
@@ -33,6 +33,8 @@ class course
     student students[50];
     public:
     int number;
+    int average;
+    student high;
     course()
     {
         counter=0;
@@ -49,11 +51,16 @@ class course
         students[i].output();
         cout<<endl;
     }
+    void outhigh()
+    {
+        high.output();
+    }
 };
 int main()
 {
    int numStudents;
    int numcourses;
+   int totalstudents=0;
    cout<<"Enter the number of courses the university provides: ";
    cin>>numcourses;
    string cors[numcourses];
@@ -67,6 +74,9 @@ int main()
    {
     cout<<"Enter the number of students in "<<cors[i]<<": ";
     cin>>numStudents;
+    totalstudents=totalstudents+numStudents;
+    int sum=0;
+    double aver;
     student stud[numStudents];
     for(int j=0;j<numStudents;j++)
     {
@@ -78,19 +88,38 @@ int main()
         cin>>reg;
         cout<<"Enter the marks of the student in "<<cors[i]<<": ";
         cin>>mar;
+        sum=sum+mar;
         stud[j].setstudent(nam,mar,reg);
         cours[i].addstudent(stud[j],numStudents);
         cout<<"\n";
     }
-    cout<<endl<<endl;
+    int index;
+    for(int k=0;k<numStudents;k++)
+    {
+        int highest=stud[k].marks;
+         index=k;
+        if(highest<stud[k].marks)
+        {
+            highest=stud[k].marks;
+            index=k;
+        }
+    }
+    cours[i].high=stud[index];
+    aver=sum/numStudents;
+    cours[i].average=aver;
    }
-   cout<<"Here is the result"<<endl;
+   cout<<"\tHere is the result"<<endl;
    for(int i=0;i<numcourses;i++)
    {
     cout<<"\t\tCOURSE: "<<cors[i]<<"\n";
     cout<<"\tNumber of students enrolled: "<<cours[i].number<<endl;
     cout<<"\tStudent details \n\n";
     cours[i].printinfo();
+    cout<<"\n\tthe average of this course is "<<cours[i].average;
+    cout<<"\n\tthe student with the highest marks "<<endl;
+    cours[i].outhigh();
+
     cout<<endl<<endl;
    }
+   cout<<"Total students: "<<totalstudents<<endl;
 }
