@@ -4,9 +4,9 @@ using namespace std;
 class student
 {
 string name;
-string regno;
 public :
 int marks;
+string regno;
 student()
 {
     marks=0;
@@ -34,7 +34,18 @@ class course
     public:
     int number;
     int average;
+    bool enrolled=false;
     student high;
+    void search(string regist,int numS)
+    {
+        for(int i=0;i<numS;i++)
+        {
+            if(regist==students[i].regno)
+            {
+                enrolled=true;
+            }
+        }
+    }
     course()
     {
         counter=0;
@@ -54,6 +65,22 @@ class course
     void outhigh()
     {
         high.output();
+    }
+    void order(int numS)
+    {
+        for(int i=0;i<numS;i++)
+        {
+            for(int j=i;j<numS;j++)
+            {
+                student temp;
+                if(students[i].marks<students[j].marks)
+                {
+                    temp=students[i];
+                    students[i]=students[j];
+                    students[j]=temp;
+                }
+            }
+        }
     }
 };
 int main()
@@ -93,6 +120,7 @@ int main()
         cours[i].addstudent(stud[j],numStudents);
         cout<<"\n";
     }
+    cours[i].order(numStudents);
     int index;
     for(int k=0;k<numStudents;k++)
     {
@@ -113,13 +141,26 @@ int main()
    {
     cout<<"\t\tCOURSE: "<<cors[i]<<"\n";
     cout<<"\tNumber of students enrolled: "<<cours[i].number<<endl;
-    cout<<"\tStudent details \n\n";
+    cout<<"\tStudent details \n";
     cours[i].printinfo();
     cout<<"\n\tthe average of this course is "<<cours[i].average;
     cout<<"\n\tthe student with the highest marks "<<endl;
     cours[i].outhigh();
-
     cout<<endl<<endl;
    }
-   cout<<"Total students: "<<totalstudents<<endl;
+   cout<<"Enter the registration number of student u want to find the courses enrolled: ";
+   string registration;
+   cin>>registration;
+   for(int i=0;i<numcourses;i++)
+   {
+    cours[i].search(registration,cours[i].number);
+   }
+   cout<<"Courses enrolled"<<endl;
+   for(int i=0;i<numcourses;i++)
+   {
+    if(cours[i].enrolled==true)
+    {
+        cout<<cors[i]<<"\t";
+    }
+   }
 }
