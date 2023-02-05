@@ -11,7 +11,10 @@ class complex
     }
     void output()
     {
+        if(y>=0)
         cout<<x<<"+"<<y<<"i "<<endl;
+        else
+        cout<<x<<y<<"i "<<endl;
     }
     friend complex add(complex q, complex w);
     friend complex sub(complex q, complex w);
@@ -41,8 +44,11 @@ complex quo(complex q,complex w)
     complex c;
     double quo;
     quo=w.x*w.x+w.y*w.y;
-    c.x=(q.x*w.x-q.y*w.y)/quo;
-    c.y=(q.x*w.y+w.x*q.y)/quo;
+    c.x=(q.x*w.x+q.y*w.y)/quo;
+    c.y=((q.x*w.y*-1)+(w.x*q.y))/quo;
+    cout<<c.x<<endl;
+    cout<<c.y<<endl;
+    return c;
 }
 int main()
 {
