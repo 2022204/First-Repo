@@ -2,6 +2,13 @@
 #define STUDENT_H
 #include<iostream>
 #include<string.h>
+#define print_arr(arr, size){\
+for(int i=0;i<size;i++)\
+{   \
+    std::cout<<arr[i]<<" ";\
+}\
+std::cout<<endl;}
+   
 using namespace std;
 class student
 {
