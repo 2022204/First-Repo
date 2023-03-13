@@ -31,6 +31,9 @@ public:
         x = a.x+b.x;
         y = b.y + a.y;
     }
+    
+    //Inside yet outside
+    void add_4(Complex a, Complex b);
 };
 
 // Friend Function
@@ -48,6 +51,13 @@ Complex adder_outside(Complex a, Complex b)
     y = a.getB() + b.getB();
     Complex ans(x,y);
     return ans;
+}
+
+//Inside declared function
+void Complex :: add_4(Complex a, Complex b)
+{
+    x = a.x+b.x;
+    y = a.y+b.y;
 }
 int main()
 {
@@ -72,4 +82,10 @@ int main()
     Complex ans3 = adder_outside(a,b);
     cout<<"Using Simple Function Outside Object"<<endl;
     ans3.output();
+
+// Using inside declard function
+    Complex ans4;
+    ans4.add_4(a,b);
+    cout<<"Inside Declared Function"<<endl;
+    ans4.output();
 }
