@@ -65,7 +65,13 @@ void display(node* ptr)
 }
 void free_memory(node *&ptr)
 {
-    
+    node *ptr1 = ptr;
+    while(ptr != NULL)
+    {
+        ptr1=ptr1->next;
+        delete ptr;
+        ptr = ptr1;
+    }
 }
 int main()
 {
@@ -115,5 +121,6 @@ int main()
             break;
         }
     }
+    free_memory(list);
     return 0;
 }
