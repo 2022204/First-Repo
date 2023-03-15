@@ -40,6 +40,5 @@ int main()
         ptr->getData();
         ptr = ptr + 1;
     }
-
     return 0;
 }

@@ -5,19 +5,19 @@ class node
     static int count;
 
 public:
-    int number;
-    node *next;
+    int num;
     node *prev;
-    node(int x)
+    node *next;
+    node(int a)
     {
-        number = x;
-        next = NULL;
+        num = a;
         prev = NULL;
+        next = NULL;
     }
     ~node()
     {
-        count++;
         cout << "Called " << count << endl;
+        count++;
     }
 };
 int node ::count = 0;
@@ -53,58 +53,34 @@ void insertAttail(node *&ptr)
     temp->next = n;
     n->prev = temp;
 }
-void display(node *ptr)
+void display(node * ptr)
 {
     node *temp = ptr;
     while (temp != NULL)
     {
-        cout << temp->number << "\t";
+        cout << temp->num << "\t";
         temp = temp->next;
     }
     cout << endl;
 }
-void free_memory(node *&ptr)
+void delete_memory(node *ptr)
 {
-    node *ptr1 = ptr;
-    while (ptr != NULL)
+    node *temp = ptr;
+    while (temp != NULL)
     {
-        ptr1 = ptr1->next;
+        temp = temp->next;
         delete ptr;
-        ptr = ptr1;
+        ptr = temp;
     }
 }
 int main()
 {
-    cout << "Dynamic Memory Allocation" << endl;
-
-    // Dynamic Memory allocation
-    // int *p = new int(40);
-    // cout<<"P: "<<*p<<endl;
-    // int *arr = new int[3];
-    // arr[0] = 10;
-    // arr[1] = 11;
-    // arr[2] = 22;
-    // for(int i = 0 ; i < 3 ; i++)
-    // {
-    //     cout<<arr[i]<<"\t";
-    // }
-    // cout<<endl;
-    // delete[] arr;
-    // delete p;
-    // for(int i = 0 ; i < 3 ; i++)
-    // {
-    //     cout<<arr[i]<<"\t";
-    // }
-    // cout<<endl;
-    // cout<<"P: "<<*p<<endl;
-    // cout<<endl;
-
-    // Pointer to objects
+    cout << "Doubly Linked list" << endl;
     node *list = NULL;
     int opt;
     while (true)
     {
-        cout << "\n\n(1)Insert at head\t(2)Insert at tail\t(3)End program" << endl;
+        cout << "(1)Add at Head\n(2)Add at tail\n(3)End program" << endl;
         cin >> opt;
         if (opt == 1)
         {
@@ -121,6 +97,8 @@ int main()
             break;
         }
     }
-    free_memory(list);
+    cout << "Final SHow Down" << endl;
+    display(list);
+    delete_memory(list);
     return 0;
 }
