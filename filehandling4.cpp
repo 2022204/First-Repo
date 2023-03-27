@@ -11,7 +11,17 @@ int main()
     string word;
     cout << "Enter the word: ";
     cin >> word;
+    string p = word;
+    for(int i = 0; i < word.length(); i++)
+    {
+        word[i] = tolower(word[i]);
+    }
     ifstream file("file1.txt");
+    if(!file.is_open())
+    {
+        cout<<"Could Not open file"<<endl;
+        return 1;
+    }
     int line = 1;
     vector<int> index(0);
     vector<int> lines(0);
@@ -64,12 +74,12 @@ int main()
         }
         line++;
     }
-    cout << "The word \"" << word << "\" Details" << endl;
+    cout << "The word \"" << p << "\" Details" << endl;
     cout << "Count: " << count << endl;
-    for(int i = 0; i < lines.size(); i++)
+    for(int i = 0; i < lines.size();i++)
     {
-        
+        cout<<"Line: "<<lines.at(i)<<"\tIndex: "<<index.at(i)<<endl;
     }
     cout << endl;
-    cout << endl;
+    return 0;
 }
