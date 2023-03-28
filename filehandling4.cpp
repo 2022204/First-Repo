@@ -25,8 +25,6 @@ int main()
     int line = 1;
     vector<int> index(0);
     vector<int> lines(0);
-    vector<int> num_line(0);
-    int line_count = 0;
     int count = 0;
     string st;
     int length = word.length();
@@ -34,7 +32,7 @@ int main()
     while (file.eof() == 0)
     {
         getline(file, st);
-        for (int i = 0; i < st.length(); i++)
+        for (int i = 0; i + length <= st.length(); i++)
         {
             condition = true;
             for (int j = i; j < i + length; j++)
@@ -48,28 +46,12 @@ int main()
             }
             if (condition == true)
             {
-                if (i != 0)
+                if (i == 0 || !isalpha(st[i-1]) && (i + length == st.length() || !isalpha(st[i + length])))
                 {
-                    if (!isalpha(st[i - 1]) && !isalpha(st[i + length]))
-                    {
-                        line_count++;
                         count++;
-                        index.push_back(i);
+                        index.push_back(i + 1);
                         lines.push_back(line);
-                    }
                 }
-                else
-                {
-                    if (!isalpha(st[i + length]))
-                    {
-                        line_count++;
-                        count++;
-                        index.push_back(i+1);
-                        lines.push_back(line);
-                    }
-                }
-                num_line.push_back(line_count);
-                line_count = 0;
             }
         }
         line++;
